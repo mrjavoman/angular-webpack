@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ServerService } from '../server.service';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    constructor() {}
+    name: string = "my name"; 
+
+    constructor(private serverService: ServerService) {}
 
     ngOnInit() {
-
+        this.serverService.getUsers().subscribe(
+            (response) => {
+                console.log(JSON.parse(response.text())[0].firstname);
+                this.name = JSON.parse(response.text())[0].firstname;
+            },
+            (error) => console.log(error)
+        );
     }
 }
