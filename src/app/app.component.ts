@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import '../assets/css/styles.css';
+import '../assets/css/bootstrap.min.css';
 
 @Component({
   selector: 'my-app',

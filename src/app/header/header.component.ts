@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.serverService.getUsers().subscribe(
             (response) => {
-                console.log(JSON.parse(response.text())[0].firstname);
+                console.log(response);
                 this.name = JSON.parse(response.text())[0].firstname;
             },
             (error) => console.log(error)
