@@ -1,11 +1,8 @@
-import { Component, OnInit, ViewChildren, QueryList, OnDestroy, forwardRef, Injector } from '@angular/core';
+import { Component, OnInit, forwardRef} from '@angular/core';
 
 import {
     FormControl,
     FormGroup,
-    ControlContainer,
-    Validators,
-    FormGroupDirective
 } from '@angular/forms';
 
 export abstract class FormControlContainer {
@@ -18,20 +15,30 @@ export const formGroupContainerProvider: any = {
     useExisting: forwardRef(() => HeaderComponent)
 };
 
+import { ServerService } from '../server.service';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css'],
-    providers: [formGroupContainerProvider]
+    providers: [formGroupContainerProvider, ServerService]
 })
 export class HeaderComponent implements OnInit, FormControlContainer {
 
     form: FormGroup = new FormGroup({});
 
-    constructor() {}
+    name: string = "my name"; 
+
+    constructor(private serverService: ServerService) {}
 
     ngOnInit() {
-
+        this.serverService.getUsers().subscribe(
+            (response) => {
+                console.log(response);
+                this.name = JSON.parse(response.text())[0].firstname;
+            },
+            (error) => console.log(error)
+        );
     }
 
     onSubmit() {
