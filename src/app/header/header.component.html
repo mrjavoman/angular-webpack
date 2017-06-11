@@ -1,1 +1,7 @@
-<div>header works</div>
+<form [formGroup]="form">
+    <app-firstchild></app-firstchild>
+    <app-secondchild></app-secondchild>
+    <div>
+        <button type="button" (click)="onSubmit()">Submit</button>
+    </div>
+</form>

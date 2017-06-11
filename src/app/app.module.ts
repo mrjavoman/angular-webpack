@@ -3,14 +3,20 @@ import { BrowserModule }  from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { FirstChildComponent } from './header/firstchild/firstchild.component';
+import { SecondChildComponent } from './header/secondchild/secondchild.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    FirstChildComponent,
+    SecondChildComponent
   ],
   bootstrap: [ AppComponent ]
 })
