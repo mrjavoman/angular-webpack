@@ -2,8 +2,11 @@
  * Created by Xavi on 6/11/2017.
  */
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import { FormControl, Validators, FormArray } from "@angular/forms";
 import {FormControlContainer} from "../header.component";
+
+import { ServerService } from '../../server.service';
+
 
 @Component({
     selector: 'app-firstchild',
@@ -12,18 +15,28 @@ import {FormControlContainer} from "../header.component";
 })
 export class FirstChildComponent implements OnInit, OnDestroy {
 
-    firstName: FormControl;
+    nameArray: FormArray;
 
-    constructor(private _parent: FormControlContainer) {
-        this.firstName = new FormControl('', Validators.required);
-        this._parent.addControl('firstName', this.firstName);
+    constructor(private _parent: FormControlContainer, private serverService: ServerService) {
+
+        this.nameArray = new FormArray([]);
     }
 
     ngOnInit() {
+         this.serverService.getUsers().subscribe(
+            (response) => {
+                console.log(response);
+                
+                this.nameArray.push(new FormControl({name: JSON.parse(response.text())[0].firstname, value: false }));
+                this.nameArray.push(new FormControl({name: JSON.parse(response.text())[1].firstname, value: false}));
 
+                this._parent.addControl('nameArray', this.nameArray);                
+            },
+            (error) => console.log(error)
+        );
     }
 
     ngOnDestroy() {
-        this._parent.removeControl('firstName');
+        this._parent.removeControl('nameArray');
     }
 }

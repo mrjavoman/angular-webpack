@@ -1,4 +1,13 @@
 <div>
-    <label for="firstName">First name:</label>
-    <input id="firstName" [formControl]="firstName" type="text"/>
+    <!--<label for="firstName">First name:</label>-->
+    <div >
+        <div *ngFor="let name of nameArray.controls; let i=index" >
+            <input id="name1"  [formControl]="name"  type="checkbox"/> 
+            <label for="name1" >{{name.value.name}}</label>
+        </div>
+    </div>
+    <!--<div>
+        <input id="name2" [formControl]="name1" type="checkbox" />
+        <label for="name2">name2</label>
+    </div>-->
 </div>

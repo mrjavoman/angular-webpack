@@ -3,10 +3,11 @@ import { Component, OnInit, forwardRef} from '@angular/core';
 import {
     FormControl,
     FormGroup,
+    AbstractControl,
 } from '@angular/forms';
 
 export abstract class FormControlContainer {
-    abstract addControl(name: string, control: FormControl): void;
+    abstract addControl(name: string, control: AbstractControl): void;
     abstract removeControl(name: string): void;
 }
 
@@ -29,16 +30,10 @@ export class HeaderComponent implements OnInit, FormControlContainer {
 
     name: string = "my name"; 
 
-    constructor(private serverService: ServerService) {}
+    constructor() {}
 
     ngOnInit() {
-        this.serverService.getUsers().subscribe(
-            (response) => {
-                console.log(response);
-                this.name = JSON.parse(response.text())[0].firstname;
-            },
-            (error) => console.log(error)
-        );
+       
     }
 
     onSubmit() {
@@ -56,7 +51,7 @@ export class HeaderComponent implements OnInit, FormControlContainer {
         }
     }
 
-    addControl(name: string, control: FormControl): void {
+    addControl(name: string, control: AbstractControl): void {
         this.form.addControl(name, control);
     }
 
