@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
     selector: 'app-header',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+    displayMsg: string;
+    @Input() name: string;
+
     constructor() {}
 
     ngOnInit() {
+
+        // Can string can be interpolated now
+        this.displayMsg = "Hello " + this.name + ", The header component works!";
+    }
+
+    displayMessage() {
 
     }
 }
