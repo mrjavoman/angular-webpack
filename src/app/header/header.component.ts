@@ -1,4 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { XComponentComService } from '../../shared/x-component-com.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-header',
@@ -7,18 +9,20 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    displayMsg: string;
     @Input() name: string;
+    displayMsg: string;
+    subscription: Subscription;
 
-    constructor() {}
+    constructor(private xComponentCom: XComponentComService) { }
 
     ngOnInit() {
 
         // Can string can be interpolated now
-        this.displayMsg = "Hello " + this.name + ", The header component works!";
+        this.displayMsg = 'Hello ' + this.name + ', The header component works!';
     }
 
-    displayMessage() {
-
+    sendMessage() {
+        // Send a message to body component
+        this.xComponentCom.sendMessage('Message for body component');
     }
 }

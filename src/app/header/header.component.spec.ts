@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { HeaderComponent } from './header.component'
+import { HeaderComponent } from './header.component';
 
 describe('header', () => {
 

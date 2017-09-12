@@ -4,7 +4,7 @@
   "private": true,
   "description": "Example project from an angular.io guide.",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0",
     "test": "karma start --browsers PhantomJS karma.webpack.conf.js",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --bail",
     "lint": "tslint ./src/**/*.ts -t verbose"

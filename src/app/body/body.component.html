@@ -1,0 +1,28 @@
+<div class="container body-container">
+    <div class="row row-container">
+        <div class="col-xs-3">
+            Enter a name: 
+        </div>
+        <div class="col-xs-9">
+            <input type="text" size="50px" [formControl]='nameControl' /> 
+        </div>
+    </div>
+    <div class="row row-container">
+        <div class="col-xs-3">
+            Enter a Message: 
+        </div>
+        <div class="col-xs-9">
+            <input type="text" size="50px" [formControl]='messageControl' />    
+        </div>
+    </div>
+</div>
+
+<div> 
+       
+    </div>
+<div> 
+    
+</div>
+<div>
+    <input type="submit" (click)="onSubmit()" />
+</div>
