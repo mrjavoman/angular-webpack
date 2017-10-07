@@ -1,13 +1,16 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var copyWebPackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+
+const env = process.env.NODE_ENV || '';
 
 module.exports = {
   entry: {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
-    'app': './src/main.ts'
+    'app': './src/main.ts',
   },
 
   resolve: {
@@ -62,6 +65,14 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
+    }),
+
+    new copyWebPackPlugin([
+      {from: 'src/assets', to: 'assets' }
+    ]),
+
+    new webpack.DefinePlugin({
+      'process.env.ENV': JSON.stringify(env.trim())
     })
   ]
 };

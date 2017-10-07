@@ -17,8 +17,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
 
-        // Can string can be interpolated now
-        this.displayMsg = 'Hello ' + this.name + ', The header component works!';
+        this.displayMsg = `Hello ${name}, The header component works!`;
     }
 
     sendMessage() {
