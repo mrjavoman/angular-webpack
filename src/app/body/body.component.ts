@@ -3,6 +3,8 @@ import { XComponentComService } from '../../shared/x-component-com.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { FormService } from './body.service';
 
+declare var LZString: any;
+
 @Component({
     selector: 'app-body',
     templateUrl: './body.component.html',
@@ -54,14 +56,15 @@ export class BodyComponent implements OnInit, OnDestroy {
 
         reader.onload = (f: any) => {
 
-            let myUint8Array = new Uint8Array(f.currentTarget.result)
-            let b64_val = btoa(String.fromCharCode.apply(null, myUint8Array));
-            console.log(b64_val);
+            let compressedString = LZString.compressToUTF16(f.currentTarget.result)
+            //let myUint8Array = new Uint8Array(f.currentTarget.result)
+            //let b64_val = btoa(String.fromCharCode.apply(null, myUint8Array));
+            //console.log(b64_val);
                                     
-            this.attachments.push(new FormControl(b64_val));
+            this.attachments.push(new FormControl(compressedString));
         };
 
-        reader.readAsArrayBuffer(event.target.files[0]);       
+        reader.readAsText(event.target.files[0]);       
     }
 
     onSubmit() {
